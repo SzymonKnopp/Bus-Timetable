@@ -1,0 +1,41 @@
+.TH timetable 1 03.05.2020 "1.2" "timetable man page"
+.SH NAME
+timetable - pobierz godziny przyjazdów autobusów z internetowego rozkładu jazdy.
+
+.SH SYNOPSIS
+\fBtimetable \fR[\fB-h\fR] \fR[\fB-v\fR] \fR[\fB-f \fIfavorite\fR] [\fB-d \fIday\fR] [\fB-t \fItime\fR] [\fB-c \fIcount\fR]
+
+.SH DESCRIPTION
+Skrypt pobiera godziny odjazdu autobusów w Tczewie, pobierając informacje z internetowego rozkładu jazdy. Pozwala na określenie przystanku i kierunku (w postaci ulubionego rozkładu), godziny po której mają odjeżdżać autobusy, rodzaju dnia tygodnia oraz liczby autobusów do wyświetlenia.
+.PP
+Użytkownik wprowadza dane do skryptu za pomocą \fBopcji\fR lub (w przypadku niepodania żadnej z opcji) interfejsu \fBzenity\fR.
+
+.SH OPTIONS
+.TP
+.B -h
+otwiera tę stronę manuala
+.TP
+.B -v
+wyświetla wersję skryptu
+.TP
+.BI "-f " "favorite"
+wybór rozkładu jazdy. \fIfavorite\fR to nazwa rozkładu z pliku \fBfavorites\fR umieszczonym w ścieżce wywołania. Argument konieczny do działania bez interfejsu \fBzenity\fR.
+.TP
+.BI "-d " "day"
+wybór rodzaju dnia tygodnia dla którego mają zostać znalezione autobusy. \fIday\fR to liczba (
+.BR 1 , 2 , 3 " ), gdzie " 1 " - dni powszednie, " 2 " - soboty, " 3 " - niedziele i święta."
+Argument opcjonalny, jeśli nie wystąpi, \fIday\fR przyjmie wartość \fB1\fR.
+.TP
+.BI "-t " "time"
+wybór godziny po której mają odjechać autobusy. \fItime\fR to godzina w formacie \fBHH:MM\fR. Argument opcjonalny, jeśli nie wystąpi, \fItime\fR przyjmie wartość bieżącej godziny.
+.TP
+.BI "-c " "count"
+wybór liczby autobusów do wyświetlenia w oknie zenity/przekazania do standardowego wyjścia. \fIcount\fR to liczba naturalna. Argument opcjonalny, jeśli nie wystąpi, \fIcount\fR przyjmie wartość \fB10\fR.
+
+.SH SEE ALSO
+.IP
+.BR wget (1)
+
+.SH AUTHOR
+Szymon Knopp, 175550
+WETI Inf gr.3

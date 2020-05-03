@@ -1,49 +1,60 @@
 #!/bin/bash
+# Author           : Szymon Knopp, 175550 ( s175550@student.pg.edu.pl )
+# Created On       : 10.04.20r.
+# Last Modified By : Szymon Knopp, 175550 ( s175550@student.pg.edu.pl )
+# Last Modified On : 03.05.20r.
+# Version          : 1.2
+#
+# Description      : Script downloads data about buses in Tczew
+# Opis               based on the data given by user
+#                    (time, amount, day of a week, link to a webpage containing timetable).
+#                    For more details, refer to manual page.
+#
+# Licensed under GPL (see /usr/share/common-licenses/GPL
 
 #DEFAULT VALUES
-LINK=""
 DAY=1
 TIME=$(date +"%H:%M")
 AMOUNT=5
 
-FAVORITES=favorites # path to a file containing saved data
+VERSION="1.2"
 
-ESCAPE=0
+FAVORITES=favorites # path to a file containing saved data
+echo "">>favorites
 
 #PROCESS OPTIONS
 ZENITY=1
-while [ -n "$1" ]; do
+while getopts hvf:d:t:c: OPT; do
     ZENITY=0
-    case "$1" in
-        -f) #favorite timetable
-            LINK=$(grep "$2" $FAVORITES | cut -d '#' -f 2)
-            shift ;;
+    case $OPT in
+        h) man ./timetableMan
+           exit ;;
 
-        -d) #day
-            DAY=$2
-            shift ;;
+        v) echo "Wersja: $VERSION"
+           exit ;;
 
-        -t) #time
-            TIME=$2
-            shift ;;
+        f) #favorite timetable
+            LINK=$(grep "$OPTARG" $FAVORITES | cut -d '#' -f 2)
+            if [ -z "$LINK" ]; then
+                echo "Taki rozkład jazdy nie istnieje w ulubionych"
+                exit
+            fi
+        ;;
 
-        -c) #count
-            AMOUNT=$2
-            shift ;;
+        d) DAY="$OPTARG";;
 
-         *) #unknown options
-            echo "Nierozpoznana opcja '$1'"
-            ESCAPE=1
-            shift ;;
+        t) TIME="$OPTARG";;
+
+        c) AMOUNT="$OPTARG";;
     esac
-    shift
 done
 
 if [ $ZENITY -eq 0 -a -z "$LINK" ]; then
     echo "Opcja '-f' jest obowiązkowa"
-    ESCAPE=1
+    exit
 fi
 
+ESCAPE=0
 until [ $ESCAPE -eq 1 ]; do
     FAV_LIST=$(cat favorites | cut -d "#" -f 1)
 
