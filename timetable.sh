@@ -1,17 +1,3 @@
-#!/bin/bash
-# Author           : Szymon Knopp, 175550 ( s175550@student.pg.edu.pl )
-# Created On       : 10.04.20r.
-# Last Modified By : Szymon Knopp, 175550 ( s175550@student.pg.edu.pl )
-# Last Modified On : 03.05.20r.
-# Version          : 1.2
-#
-# Description      : Script downloads data about buses in Tczew
-# Opis               based on the data given by user
-#                    (time, amount, day of a week, link to a webpage containing timetable).
-#                    For more details, refer to manual page.
-#
-# Licensed under GPL (see /usr/share/common-licenses/GPL
-
 #DEFAULT VALUES
 DAY=1
 TIME=$(date +"%H:%M")
